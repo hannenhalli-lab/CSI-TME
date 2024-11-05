@@ -41,11 +41,11 @@ preProcessInput <- function(inputFile, removeNA = T, removeSD = T, removeMedian 
 
 
 
-idh = "glioma"
+idh = "mut"
 source('functions.CSI-TME.R')
-cohort.discovery <- "immunotherapy"
-baseDir <- "~/DataAndAnalysis/cellTypeDeconvolution/PCA"
-
+cohort.discovery <- "tcga"
+#baseDir <- "~/DataAndAnalysis/cellTypeDeconvolution/PCA"
+baseDir <- "../data/"
 inputPath <- glue("{baseDir}/{cohort.discovery}_{idh}_filtered/")
 cellTypes <- list.files(inputPath) %>% gsub(".txt", "", .)
 outputPath <- "./"
