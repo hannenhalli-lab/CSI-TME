@@ -42,7 +42,7 @@ preProcessInput <- function(inputFile, removeNA = T, removeSD = T, removeMedian 
 
 
 idh = "glioma"
-source('../functionsForInteractionAnalysis.R')
+source('functions.CSI-TME.R')
 cohort.discovery <- "immunotherapy"
 baseDir <- "~/DataAndAnalysis/cellTypeDeconvolution/PCA"
 
