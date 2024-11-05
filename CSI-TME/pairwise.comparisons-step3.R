@@ -11,7 +11,7 @@ library(survival); library(doParallel)
 estimateFDR <- F; niter = 10 ####only used when bootstrapping 
 
 sampleType = "mut"
-source('../functionsForInteractionAnalysis.R')
+source('functions.CSI-TME.R')
 cohort <- "TCGA"; cohort.names <- "tcga"
 method <- "JADE"; dims = "10"
 
