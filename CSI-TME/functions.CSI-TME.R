@@ -1,5 +1,7 @@
 
-get.bin.intervals <- function(cp,nbins,recursion = 1) { ##From Assafg
+get.bin.intervals <- function(cp,nbins,recursion = 1) { 
+  ##From Assafg
+  #https://github.com/asmagen/SPAGEfinder
   binp = seq(from = 0, to = 1, by = 1/nbins)
   #binp <- c(0.00, 0.20, 0.60, 1.00)
   b   = unique(quantile(cp,binp,na.rm=TRUE))
