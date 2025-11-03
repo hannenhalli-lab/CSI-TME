@@ -1,7 +1,78 @@
-# CSI-TME
-A computational pipeline to infer cell state interaction network using bulk transcriptomic and clinical data from cancer patients
+# Overview
 
 <img width="576" alt="image" src="https://github.com/user-attachments/assets/07e9da7b-343d-43f8-b110-acd7e53c9dcf">
+
+CSI-TME is computational pipeline to infer cell state interaction network using bulk transcriptomic and clinical data from cancer patients. Typically, cell states in tumor microenvironments (TME) are only investigated using single cell datasets. However, there are two key limitations – 
+
+- Single cell datasets are far less abundant as well as have smaller cohort sizes than bulk transcriptomic datasets. While single cell data can provide high       resolution insights into cell state composition in the TME, the small sample sizes make it difficult to make reliable clinical predictions.
+
+- Secondly, single cell datasets are rarely linked to the clinical outcomes collected in a principled fashion.
+
+To overcome these limitations and investigate cell states and their interactions by directly leveraging bulk transcriptomes from large cohorts such as TCGA, we developed CSI-TME, a computational tool that uses a combination of supervised and unsupervised learning approaches to first the estimate cell state composition in the tumor microenvironment, and then model the clinical data based on the joint activity of the pairs of cell states.
+
+For details, please check our preprint @ https://www.biorxiv.org/content/10.1101/2024.10.29.620901v1
+
+# Running CSI-TME
+
+There are two main use cases for CSI-TME
+
+1. Mine prognostic cell state interactions in a new large cohort.
+2. Using pre-trained model to score your samples for pro- and anti-tumor interactions.
+
+A step-by-step tutorial is provided below for each of these steps 
+
+1. Mine prognostic cell state interactions in a new large cohort
+
+## Required input
+- Bulk gene expression data from a large cohort of cancer patients (Gene x Sample matrix)
+
+- Matching clinical data with atleast the following columns
+
+<img width="468" height="141" alt="clinical" src="https://github.com/user-attachments/assets/6a639c23-4b11-41cb-a437-13b806fbbe1c" />
+
+status 0 => Alive; 1 => Death
+
+### Step 1. 
+From Unix shell, script_path_training.R to create the directories where input/output data will be stored; for eg.
+
+``` Rscript codebase/R/script_path_training.R Cohort_1 ```
+
+This will create two directories; **input/Cohort_1** and **output/Cohort_1**. 
+
+- If you have already deconcoved the cell type specific gene expression profiles, please store them at **input/Cohort_1/deconvolution** with a spearate file name for each cell type (for eg. input/Cohort_1/deconvolution/Tcell.txt). 
+
+- Otherwise, place the bulk gene expression file  (Gene x Samples) at the **input/Cohort_1/genes/expression_data.txt** file and perform the cell type specific deconvolution using 
+
+``` bash codebase/bash/deconvolve.sh Cohort_1 ```
+
+This will perform deconvolution using a combination of cibersortX and CODEFACS and the deconvoved data will be placed in **input/Cohort_1/deconvolution** directory. We strongly encourage to try a couple of different deconvolution algorithams. 
+
+### Step 2. 
+
+After deconvolution, run the following command - 
+ ``` bash codebase/bash/CSI-TME.sh Cohort_1 ```
+
+This will perform create ICA factorization of the cell type specific gene expression profiles and screen for prognostic cell state combinations of the IC pairs using Cox regression, followed by 10 bootstraps to deduce crossvalidation accuracy. The final output will be stored in file called CSI-TME_significant_crossvalidation.txt in the directory named as **input/Cohort_1**. Users are free to set select most significant interactions of their interest using FDR thresholds or crossvalidation accuracy thresholds. 
+
+### Step 3.
+
+If users have access to the bulk transcriptomic datasets from more than one large cohorts, then remaining cohorts can be used for the purpose of cross-cohort validation as follows
+
+``` script_path_validation.R cohort_2 ``` 
+
+place the bulk gene expression data in input/Cohort_1/validation/cohort_2/genes/expression_data.txt and run 
+
+``` ica_project_new.sh Cohort_1 cohort_2 ``` 
+
+This will use the ICA models fitted Cohort_1
+
+
+
+
+
+
+
+
 
 For details, please check our preprint @ https://www.biorxiv.org/content/10.1101/2024.10.29.620901v1
 
