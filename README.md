@@ -2,13 +2,14 @@
 
 <img width="576" alt="image" src="https://github.com/user-attachments/assets/07e9da7b-343d-43f8-b110-acd7e53c9dcf">
 
-CSI-TME is computational pipeline to infer cell state interaction network using bulk transcriptomic and clinical data from cancer patients. Typically, cell states in tumor microenvironments (TME) are only investigated using single cell datasets. However, there are two key limitations – 
+CSI-TME - A computational pipeline to infer cell state interaction network using bulk transcriptomic and clinical data from cancer patients. 
+Typically, cell states in tumor microenvironments (TME) are only investigated using single cell datasets. However, there are two key limitations – 
 
-- Single cell datasets are far less abundant as well as have smaller cohort sizes than bulk transcriptomic datasets. While single cell data can provide high       resolution insights into cell state composition in the TME, the small sample sizes make it difficult to make reliable clinical predictions.
+- Single cell datasets are far less abundant as well as have smaller cohort sizes than bulk transcriptomic datasets making it difficult to make reliable clinical predictions.
 
 - Secondly, single cell datasets are rarely linked to the clinical outcomes collected in a principled fashion.
 
-To overcome these limitations and investigate cell states and their interactions by directly leveraging bulk transcriptomes from large cohorts such as TCGA, we developed CSI-TME, a computational tool that uses a combination of supervised and unsupervised learning approaches to first the estimate cell state composition in the tumor microenvironment, and then model the clinical data based on the joint activity of the pairs of cell states.
+To overcome these limitations, CSI-TME uses a combination of supervised and unsupervised learning approaches to first the estimate cell state composition in the tumor microenvironment, and then model the clinical data based on the joint activity of the pairs of cell states.
 
 For details, please check our preprint @ https://www.biorxiv.org/content/10.1101/2024.10.29.620901v1
 
@@ -56,15 +57,21 @@ This will perform create ICA factorization of the cell type specific gene expres
 
 ### Step 3.
 
-If users have access to the bulk transcriptomic datasets from more than one large cohorts, then remaining cohorts can be used for the purpose of cross-cohort validation as follows
+If users have access to the bulk transcriptomic datasets with matched clinical outcomes from more than one large cohorts, then remaining cohorts can be used for the purpose of cross-cohort validation as follows
 
-``` script_path_validation.R cohort_2 ``` 
+``` Rscript codebase/R/script_path_validation.R cohort_2 ``` 
 
-place the bulk gene expression data in input/Cohort_1/validation/cohort_2/genes/expression_data.txt and run 
+place the bulk gene expression data in **input/Cohort_1/validation/cohort_2/genes/expression_data.txt** and clinical data in **input/Cohort_1/validation/cohort_2/clinical_data.txt** for new cohort and run 
 
-``` ica_project_new.sh Cohort_1 cohort_2 ``` 
+``` bash codebase/bash/ica_project_new.sh Cohort_1 cohort_2 ``` 
 
-This will use the ICA models fitted Cohort_1
+This will use the gene weights from ICA models fitted Cohort_1 to project the bulk data from cohort_2.
+
+Lastly -
+
+``` bash codebase/bash/CSI_validate.sh Cohort_1 cohort_2 ```
+
+
 
 
 
