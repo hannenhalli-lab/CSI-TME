@@ -89,4 +89,21 @@ This will create a file **output/Cohort_1/marker_genes.txt** listing cell type, 
 
 ``` bash codebase/R/Rscript script_extract_cellstates.R Cohort_1 ```
 
+#### Extract the interaction penetrance and interaction load
+
+* After identifying and validating CSIs, one can extract the interaction penetrance (calculated per interaction), and interaction load (calculated per sample) in the discovery or any new cohort. 
+
+* If there are more than one kinds of samples (for instance, responders and non-responders) then both interaction penetrance and interation load can be calculated separately for each sample group by providing the sample classifications with ``` --sample_file ``` argument. Otherwise, skip using ``` --sample_file ``` argument
+
+``` bash codebase/R/Rscript script_penetrance_load.R --discovery_cohort Cohort_1 --target_cohort Cohort_2 --is_cohort validation --sample_file input/Cohort_1/validation/Cohort_2/sample_class.txt ```
+
+This will generate two files - 
+* output/Cohort_1/interaction_load_Cohort_2.txt
+* output/Cohort_1/interaction_penetrance_Cohort_2.txt
+
+
+
+
+_If you have any questions, please reach out at arashdeep.singh@nih.gov or sridhar.hannenhalli@nih.gov_
+
 
