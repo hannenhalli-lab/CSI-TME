@@ -44,7 +44,7 @@ This will create two directories; **input/Cohort_1** and **output/Cohort_1**.
 
 ``` bash codebase/bash/deconvolve.sh Cohort_1 ```
 
-This will perform deconvolution using a combination of cibersortX and CODEFACS and the deconvoved data will be placed in **input/Cohort_1/deconvolution** directory. We strongly encourage to try a couple of different deconvolution algorithams. 
+This will perform deconvolution using a combination of cibersortX and CODEFACS and the deconvoved data will be placed in **input/Cohort_1/deconvolution** directory. We encourage to try a couple of different deconvolution algorithams. 
 
 ### Step 2. Detection cell state interactions
 
