@@ -25,7 +25,7 @@ A step-by-step tutorial is provided below for each of these steps
 1. Mine prognostic cell state interactions in a new large cohort
 
 ## Required input
-- Bulk gene expression data from a large cohort of cancer patients (Gene x Sample matrix)
+- Bulk gene expression data from a large cohort of cancer patients (Gene x Sample matrix). We recommend atleast 200 samples for sufficient statistical power.
 
 - Matching clinical data with atleast the following columns
 
@@ -33,7 +33,7 @@ A step-by-step tutorial is provided below for each of these steps
 
 status 0 => Alive; 1 => Death
 
-### Step 1. 
+### Step 1. Create directories to control input and output flow
 From Unix shell, script_path_training.R to create the directories where input/output data will be stored; for eg.
 
 ``` Rscript codebase/R/script_path_training.R Cohort_1 ```
@@ -48,35 +48,40 @@ This will create two directories; **input/Cohort_1** and **output/Cohort_1**.
 
 This will perform deconvolution using a combination of cibersortX and CODEFACS and the deconvoved data will be placed in **input/Cohort_1/deconvolution** directory. We strongly encourage to try a couple of different deconvolution algorithams. 
 
-### Step 2. 
+### Step 2. Detection cell state interactions
 
 After deconvolution, run the following command - 
  ``` bash codebase/bash/CSI-TME.sh Cohort_1 ```
 
 This will perform create ICA factorization of the cell type specific gene expression profiles and screen for prognostic cell state combinations of the IC pairs using Cox regression, followed by 10 bootstraps to deduce crossvalidation accuracy. The final output will be stored in file called CSI-TME_significant_crossvalidation.txt in the directory named as **input/Cohort_1**. Users are free to set select most significant interactions of their interest using FDR thresholds or crossvalidation accuracy thresholds. 
 
-### Step 3.
+### Step 3. Validate cell state interactions in an independent cohort
 
 If users have access to the bulk transcriptomic datasets with matched clinical outcomes from more than one large cohorts, then remaining cohorts can be used for the purpose of cross-cohort validation as follows
 
-``` Rscript codebase/R/script_path_validation.R cohort_2 ``` 
+``` Rscript codebase/R/script_path_validation.R Cohort_2 ``` 
 
-place the bulk gene expression data in **input/Cohort_1/validation/cohort_2/genes/expression_data.txt** and clinical data in **input/Cohort_1/validation/cohort_2/clinical_data.txt** for new cohort and run 
+place the bulk gene expression data in **input/Cohort_1/validation/Cohort_2/genes/expression_data.txt** and clinical data in **input/Cohort_1/validation/Cohort_2/clinical_data.txt** for new cohort and run 
 
-``` bash codebase/bash/ica_project_new.sh Cohort_1 cohort_2 ``` 
+``` bash codebase/bash/ica_project_new.sh Cohort_1 Cohort_2 ``` 
 
-This will use the gene weights from ICA models fitted Cohort_1 to project the bulk data from cohort_2.
+This will use the gene weights from ICA models fitted Cohort_1 to project the bulk data from Cohort_2 
 
 Lastly -
 
-``` bash codebase/bash/CSI_validate.sh Cohort_1 cohort_2 ```
+``` bash codebase/bash/CSI_validate.sh Cohort_1 Cohort_2 ```
 
+This step will calculcate the hazard ratios using the clinical data for new Cohort_2. The output from this step will be stored in file **output/Cohort_1/validation/Cohort_2/CSI_discovery_validation.txt**. 
 
+### Step 4. Exploratory analysis of cell state interactions
 
+Finally, we provide some options to help interprettation and additional exploratory analysis  as follows
 
+#### Extract marker genes of Independent components
 
+``` bash codebase/R/Rscript script_extract_markers.R Cohort_1 ```
 
-
+This will create a file **output/Cohort_1/marker_genes.txt** listing cell type, their ICs, and corresponding marker genes. These marker genes can be used to interpret the CSIs
 
 
 
