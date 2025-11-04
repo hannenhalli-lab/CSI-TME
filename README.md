@@ -77,12 +77,14 @@ This step will calculcate the hazard ratios using the clinical data for new Coho
 
 Finally, we provide some options to help interprettation and additional exploratory analysis  as follows
 
-#### Extract marker genes of Independent components
+
+#### Extract marker genes of Independent Components
 
 ``` bash codebase/R/Rscript script_extract_markers.R Cohort_1 ```
 
 This will create a file **output/Cohort_1/marker_genes.txt** listing cell type, their ICs, and corresponding marker genes. These marker genes can be used to interpret the CSIs
 
+#### Extract scores of Independent Components across samples in discovery cohort, which correspond to the cell states
 
-
+``` bash codebase/R/Rscript script_extract_cellstates.R Cohort_1 ```
 
