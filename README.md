@@ -87,7 +87,7 @@ This will create a file **output/Cohort_1/marker_genes.txt** listing cell type, 
 
 #### Extract scores of Independent Components across samples in discovery cohort, which correspond to the cell states
 
-``` bash codebase/R/Rscript script_extract_cellstates.R Cohort_1 ```
+``` bash codebase/R/Rscript script_extract_cellstates.R --cohort_name Cohort_1 ```
 
 #### Extract the interaction penetrance and interaction load
 
