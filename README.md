@@ -50,7 +50,8 @@ This will perform deconvolution using a combination of cibersortX and CODEFACS a
 
 ### Step 2. Detection cell state interactions
 
-After deconvolution, run the following command - 
+After deconvolution, run the following command
+
  ``` bash codebase/bash/CSI-TME.sh Cohort_1 ```
 
 This will perform create ICA factorization of the cell type specific gene expression profiles and screen for prognostic cell state combinations of the IC pairs using Cox regression, followed by 10 bootstraps to deduce crossvalidation accuracy. The final output will be stored in file called CSI-TME_significant_crossvalidation.txt in the directory named as **input/Cohort_1**. Users are free to set select most significant interactions of their interest using FDR thresholds or crossvalidation accuracy thresholds. 
