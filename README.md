@@ -22,8 +22,6 @@ There are two main use cases for CSI-TME
 
 A step-by-step tutorial is provided below for each of these steps 
 
-1. Mining prognostic cell state interactions in a new cohort
-
 ## Required input
 - Bulk gene expression data from a large cohort of cancer patients (Gene x Sample matrix). We recommend atleast 200 samples for sufficient statistical power.
 
