@@ -17,12 +17,12 @@ For details, please check our preprint @ https://www.biorxiv.org/content/10.1101
 
 There are two main use cases for CSI-TME
 
-1. Mine prognostic cell state interactions in a new large cohort.
+1. Minining prognostic cell state interactions in a new cohort.
 2. Using pre-trained model to score your samples for pro- and anti-tumor interactions.
 
 A step-by-step tutorial is provided below for each of these steps 
 
-1. Mine prognostic cell state interactions in a new large cohort
+1. Mining prognostic cell state interactions in a new cohort
 
 ## Required input
 - Bulk gene expression data from a large cohort of cancer patients (Gene x Sample matrix). We recommend atleast 200 samples for sufficient statistical power.
@@ -87,4 +87,5 @@ This will create a file **output/Cohort_1/marker_genes.txt** listing cell type, 
 #### Extract scores of Independent Components across samples in discovery cohort, which correspond to the cell states
 
 ``` bash codebase/R/Rscript script_extract_cellstates.R Cohort_1 ```
+
 
