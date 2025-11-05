@@ -85,7 +85,7 @@ This will create a file **output/Cohort_1/marker_genes.txt** listing cell type, 
 
 #### Extract scores of Independent Components across samples in discovery cohort, which correspond to the cell states
 
-``` bash codebase/R/Rscript script_extract_cellstates.R --cohort_name Cohort_1 ```
+``` Rscript codebase/R/script_extract_cellstates.R --cohort_name Cohort_1 ```
 
 #### Extract the interaction penetrance and interaction load
 
@@ -93,7 +93,7 @@ This will create a file **output/Cohort_1/marker_genes.txt** listing cell type, 
 
 * If there are more than one kinds of samples (for instance, responders and non-responders) then both interaction penetrance and interation load can be calculated separately for each sample group by providing the sample classifications with ``` --sample_file ``` argument. Otherwise, skip using ``` --sample_file ``` argument
 
-``` bash codebase/R/Rscript script_penetrance_load.R --discovery_cohort Cohort_1 --target_cohort Cohort_2 --is_cohort validation --sample_file input/Cohort_1/validation/Cohort_2/sample_class.txt ```
+``` Rscript codebase/R/script_penetrance_load.R --discovery_cohort Cohort_1 --target_cohort Cohort_2 --is_cohort validation --sample_file input/Cohort_1/validation/Cohort_2/sample_class.txt ```
 
 This will generate two files - 
 * output/Cohort_1/interaction_load_Cohort_2.txt
