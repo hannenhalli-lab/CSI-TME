@@ -79,7 +79,7 @@ Finally, we provide some options to help interprettation and additional explorat
 
 #### Extract marker genes of Independent Components
 
-``` bash codebase/R/Rscript script_extract_markers.R --cohort_name Cohort_1 ```
+``` Rscript codebase/R/script_extract_markers.R --cohort_name Cohort_1 ```
 
 This will create a file **output/Cohort_1/marker_genes.txt** listing cell type, their ICs, and corresponding marker genes. These marker genes can be used to interpret the CSIs
 
